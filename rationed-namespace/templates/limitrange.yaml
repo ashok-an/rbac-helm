@@ -2,11 +2,26 @@
 apiVersion: v1
 kind: LimitRange
 metadata:
-  name: mem-limit-range
+  name: {{ .Values.namespace.name }}-limit-range
+  namespace: {{ .Values.namespace.name }}
+{{- template "chart.commonLabels" . }}
 spec:
   limits:
-    - default:
-        memory: 512Mi
+    - type: Container
+      min:
+        cpu: {{ .Values.limits.minCpu | quote }}
+        memory: {{ .Values.limits.minMemory }}
+      max:
+        cpu: {{ .Values.limits.maxCpu | quote }}
+        memory: {{ .Values.limits.maxMemory }}
+      default:
+        cpu: {{ .Values.limits.minCpu | quote }}
+        memory: {{ .Values.limits.minMemory }}
       defaultRequest:
-        memory: 256Mi
-      type: Container
+        cpu: {{ .Values.limits.minCpu | quote }}
+        memory: {{ .Values.limits.minMemory }}
+    - type: PersistentVolumeClaim
+      max:
+        storage: {{ .Values.limits.maxStorage }} 
+      min:
+        storage: 128Mi

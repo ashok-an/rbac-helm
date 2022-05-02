@@ -4,16 +4,16 @@ kind: NetworkPolicy
 metadata:
   name: {{ .Values.namespace.name }}-netpol
   namespace: {{ .Values.namespace.name }}
-{{- template "chart.commonLabels" }}
+{{- template "chart.commonLabels" . }}
 spec:
   podSelector: {} # all pods
   ingress: # can receive traffic from all pods in the same namespace
   - from:
     - namespaceSelector:
         matchLabels:
-          app.kubernetes.io/name: {{ .Values.namespace.name }}
+          app.kubernetes.io/teamName: {{ .Values.inputs.teamName }}
   egress: # can send traffic to all pods in the same namespace
   - to:
     - namespaceSelector:
         matchLabels:
-          app.kubernetes.io/name: {{ .Values.namespace.name }}
+          app.kubernetes.io/teamName: {{ .Values.inputs.teamName }}

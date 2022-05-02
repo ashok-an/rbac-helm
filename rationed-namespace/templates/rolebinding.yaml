@@ -4,7 +4,7 @@ kind: RoleBinding
 metadata:
   name: {{ .Values.namespace.name }}-editor
   namespace: {{ .Values.namespace.name }}
-{{- template "chart.commonLabels" }}
+{{- template "chart.commonLabels" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -12,14 +12,14 @@ roleRef:
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
-  name: oidc:{{ .Values.oidc.group | default .Values.namespace.name }}
+  name: oidc:{{ .Values.inputs.oidcGroup | default .Values.namespace.name }}
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ .Values.namespace.name }}-viewer
-{{- template "chart.commonLabels" }}
+{{- template "chart.commonLabels" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -27,4 +27,4 @@ roleRef:
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
-  name: oidc:{{ .Values.oidc.group | default .Values.namespace.name }}
+  name: oidc:{{ .Values.inputs.oidcGroup | default .Values.namespace.name }}

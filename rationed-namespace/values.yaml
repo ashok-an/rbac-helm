@@ -1,14 +1,12 @@
-team:
-  name: devx-alpha
-  email: devx-alpha@cisco.com
+inputs:
+  teamName: devx-alpha
+  teamEmail: devx-alpha@cisco.com
   webexRoomName: devx-alpha-alerts
   webexRoomId: abcd1234
-
-oidc:
-  group: devx-alpha
+  oidcGroup: devx-alpha-oidc
 
 namespace:
-  name: test-ns
+  name: devx-alpha-ns
 
 serviceAccount:
   name: devx-alpha-sa
@@ -16,13 +14,14 @@ serviceAccount:
 ingress:
   ip: 127.0.0.1
 
-resourceQuota:
+limits:
   maxCpu: "5" 
   maxMemory: 20Gi
   minCpu: ".1"
   minMemory: 128Mi
   maxGpu: 0
-  maxStorage: 30Gi
+  maxStorage: 50Gi
+  maxEphemeralStorage: 30Gi
   counts:
     pods: 30
     services: 10

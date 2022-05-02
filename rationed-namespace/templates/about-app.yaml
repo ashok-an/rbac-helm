@@ -1,11 +1,10 @@
 ---
-# Source: hello-kubernetes/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: about-{{ .Values.namespace.name }}
   namespace: {{ .Values.namespace.name }}
-{{- template "chart.commonLabels" }}
+{{- template "chart.commonLabels" . }}
     app.kubernetes.io/name: about-{{ .Values.namespace.name }}
 spec:
   ports:
@@ -17,13 +16,12 @@ spec:
     app.kubernetes.io/name: about-{{ .Values.namespace.name }}
 
 ---
-# Source: hello-kubernetes/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: about-{{ .Values.namespace.name }}
   namespace: default
-{{- template "chart.commonLabels" }}
+{{- template "chart.commonLabels" . }}
     app.kubernetes.io/name: about-{{ .Values.namespace.name }}
 spec:
   replicas: 2

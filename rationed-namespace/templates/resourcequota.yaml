@@ -2,14 +2,24 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: pods-high
+  name: resource-quota
+  namespace: {{ .Values.namespace.name }}
+{{- template "chart.commonLabels" . }}
 spec:
   hard:
-    cpu: '1000'
-    memory: 200Gi
-    pods: '10'
-  scopeSelector:
-    matchExpressions:
-      - operator: In
-        scopeName: PriorityClass
-        values: ['high']
+    requests.cpu: {{ .Values.limits.maxCpu | quote }}
+    requests.memory: {{ .Values.limits.maxMemory }}
+    requests.ephemeral-storage: {{ .Values.limits.maxEphemeralStorage }}
+    requests.storage: {{ .Values.limits.maxStorage }}
+    limits.cpu: {{ .Values.limits.maxCpu | quote }}
+    limits.memory: {{ .Values.limits.maxMemory }}
+    limits.ephemeral-storage: {{ .Values.limits.maxEphemeralStorage }}
+    pods: {{ .Values.limits.counts.pods | quote }}
+    configmaps: {{ .Values.limits.counts.configmaps | quote }}
+    secrets: {{ .Values.limits.counts.secrets | quote }}
+    ephemeral-storage: {{ .Values.limits.maxEphemeralStorage }}
+    persistentvolumeclaims: {{ .Values.limits.counts.persistentvolumeclaims | quote }}
+    services: {{ .Values.limits.counts.services | quote }}
+    services.loadbalancers: {{ .Values.limits.counts.loadbalancers | quote }}
+    services.nodeports: {{ .Values.limits.counts.nodeports | quote }}
+
