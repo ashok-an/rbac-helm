@@ -1,0 +1,6 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ required "namespace name is mandatory" .Values.namespace.name }}
+{{- template "chart.commonLabels" }}
