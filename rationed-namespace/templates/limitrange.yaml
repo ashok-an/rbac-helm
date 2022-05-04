@@ -4,7 +4,6 @@ kind: LimitRange
 metadata:
   name: {{ .Values.namespace.name }}-limit-range
   namespace: {{ .Values.namespace.name }}
-{{- template "chart.commonLabels" . }}
 spec:
   limits:
     - type: Container

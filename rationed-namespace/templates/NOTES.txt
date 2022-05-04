@@ -1,7 +1,18 @@
 This chart creates the following resources:
-- namespace
-- serviceaccount
-- rolebindings
-- limitrange
-- resourcequotas
-- networkpolicies
+```bash
+- namespace/{{ .Values.namespace.name }}
+  |_ serviceaccount/{{ .Values.namespace.name }}-sa
+  | |_ secret/{{ .Values.namespace.name }}-sa-token-<string>
+  |_ limitrange/{{ .Values.namespace.name }}-limit-range
+  |_ networkingpolicy/{{ .Values.namespace.name }}-netpol
+  |_ resourcequota/{{ .Values.namespace.name }}-resource-quota
+  |_ rolebinding.rbac.authorization.k8s.io/{{ .Values.namespace.name }}-editor
+  |_ rolebinding.rbac.authorization.k8s.io/{{ .Values.namespace.name }}-viewer
+  |_ deployment.apps/about-dep
+  | |_ pod/about-dep-<string>
+  | |_ pod/about-dep-<string>
+  |_ service/about-svc
+```
+
+To access the `about` service use:
+`❯ k port-forward -n {{ .Values.namespace.name }} svc/about-svc 8080:80`

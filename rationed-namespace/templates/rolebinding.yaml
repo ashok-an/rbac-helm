@@ -4,7 +4,6 @@ kind: RoleBinding
 metadata:
   name: {{ .Values.namespace.name }}-editor
   namespace: {{ .Values.namespace.name }}
-{{- template "chart.commonLabels" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -19,7 +18,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ .Values.namespace.name }}-viewer
-{{- template "chart.commonLabels" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

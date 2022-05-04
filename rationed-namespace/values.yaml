@@ -1,6 +1,6 @@
 inputs:
   teamName: devx-alpha
-  teamEmail: devx-alpha@cisco.com
+  emailPrefix: devx-alpha #@cisco.com
   webexRoomName: devx-alpha-alerts
   webexRoomId: abcd1234
   oidcGroup: devx-alpha-oidc

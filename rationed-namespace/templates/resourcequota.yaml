@@ -2,9 +2,8 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: resource-quota
+  name: {{ .Values.namespace.name }}-resource-quota
   namespace: {{ .Values.namespace.name }}
-{{- template "chart.commonLabels" . }}
 spec:
   hard:
     requests.cpu: {{ .Values.limits.maxCpu | quote }}

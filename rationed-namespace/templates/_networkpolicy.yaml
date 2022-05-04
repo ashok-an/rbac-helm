@@ -4,7 +4,6 @@ kind: NetworkPolicy
 metadata:
   name: {{ .Values.namespace.name }}-netpol
   namespace: {{ .Values.namespace.name }}
-{{- template "chart.commonLabels" . }}
 spec:
   podSelector: {} # all pods
   ingress: # can receive traffic from all pods in the same namespace
